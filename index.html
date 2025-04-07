@@ -6,7 +6,11 @@
         <title>BookBloom</title>
         <link rel="stylesheet" href="style.css" />
 
-        <link rel="shortcut icon" href="./assets/img/logo.png" type="image/x-icon">
+        <link
+            rel="shortcut icon"
+            href="./assets/img/logo.png"
+            type="image/x-icon"
+        />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +24,9 @@
         <header class="bg-header-footer padding-50">
             <div id="header-bar" class="max-width-1920">
                 <div id="logo">
-                    <a href="#" class="hover-glow"><img src="./assets/img/logo.png" alt="" /></a>
+                    <a href="#" class="hover-glow"
+                        ><img src="./assets/img/logo.png" alt=""
+                    /></a>
                     <a href="#" class="hover-glow"><span>BookBloom</span></a>
                 </div>
             </div>
@@ -28,26 +34,129 @@
 
         <main class="padding-50">
             <div id="main-div" class="max-width-1920">
-                <section id="favoriteBooks">
-                    <h2>Your favorite books <img src=""></h2>
-                    <div id="favorite-books">You haven't favorited any books yet!</div>
+                <section id="favorite-books">
+                    <h2>
+                        Your favorite books
+                        <img src="./assets/icons/flower.png" />
+                    </h2>
+                    <div id="favorite-books-content">
+                        You haven't favorited any books yet!
+                    </div>
                 </section>
+
                 <section id="read-books">
                     <h2>Check out the books you've read!</h2>
+
+                    <div id="read-books-content">
+                        <div id="book0" class="book-card">
+                            <h3 class="padding-20">Title</h3>
+
+                            <img src="./assets/img/book.png" />
+
+                            <div id="book-infos" class="book-infos padding-20">
+                                <div
+                                    id="price-and-likes"
+                                    class="price-and-likes"
+                                >
+                                    <span class="price" id="price">Price</span>
+
+                                    <div id="likes" class="likes">
+                                        <span id="like-counter">xxxx</span
+                                        ><img
+                                            id="heart-img"
+                                            src="assets/icons/empty_heart.png"
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+
+                                <div id="book-info-list" class="info-list">
+                                    <div class="info-pair">
+                                        <span class="bold">Author:</span>
+                                        <span>Authorname</span>
+                                    </div>
+                                    <div class="info-pair">
+                                        <span class="bold">Year:</span
+                                        ><span>xxxx</span>
+                                    </div>
+                                    <div class="info-pair">
+                                        <span class="bold">Genre:</span
+                                        ><span>xxxx</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+<h4 class="padding-20">Comments</h4>
+                            <div
+                                id="comment-section"
+                                class="comment-section padding-20"
+                            >
+                                
+                                <div
+                                    class="comment-content"
+                                    id="comment-content"
+                                >
+                                    <span class="reader bold" id="reader"
+                                        >reader</span
+                                    >
+                                    <span class="comment" id="comment"
+                                        >Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Ipsam praesentium sed
+                                        eveniet quisquam aut ea amet nostrum
+                                        ipsum labore at! Amet nemo velit error
+                                        aperiam excepturi neque obcaecati
+                                        tempore nisi?</span
+                                    >
+                                </div>
+
+                                <div
+                                    class="comment-content"
+                                    id="comment-content"
+                                >
+                                    <span class="reader bold" id="reader"
+                                        >reader</span
+                                    >
+                                    <span class="comment" id="comment"
+                                        >Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Ipsam praesentium sed
+                                        eveniet quisquam aut ea amet nostrum
+                                        ipsum labore at! Amet nemo velit error
+                                        aperiam excepturi neque obcaecati
+                                        tempore nisi?</span
+                                    >
+                                </div>
+                            </div>
+                            <form class="padding-20">
+                                <input
+                                    type="text"
+                                    id="comment-input"
+                                    required
+                                />
+                                <img
+                                    class="hover-glow"
+                                    src="./assets/icons/sent.png"
+                                />
+                            </form>
+                        </div>
+                    </div>
                 </section>
             </div>
         </main>
 
         <footer class="bg-header-footer padding-50">
             <div id="footer-div" class="max-width-1920">
-                <div class="footer-left"><a href="" class="hover-glow"><img src="./assets/img/logo.png"></a>
-                <span>&copy; 2025. All rights reserved.</span></div>
+                <div class="footer-left">
+                    <a href="" class="hover-glow"
+                        ><img src="./assets/img/logo.png"
+                    /></a>
+                    <span>&copy; 2025. All rights reserved.</span>
+                </div>
                 <div class="footer-right">
                     <a href="">Datenschutz</a>
                     <a href="">Impressum</a>
                 </div>
             </div>
-
         </footer>
     </body>
 
