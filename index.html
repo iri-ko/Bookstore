@@ -20,7 +20,7 @@
         />
     </head>
 
-    <body>
+    <body onload="init()">
         <header class="bg-header-footer padding-50">
             <div id="header-bar" class="max-width-1920">
                 <div id="logo">
@@ -86,13 +86,11 @@
                                 </div>
                             </div>
 
-
-<h4 class="padding-20">Comments</h4>
+                            <h4 class="padding-20">Comments</h4>
                             <div
                                 id="comment-section"
                                 class="comment-section padding-20"
                             >
-                                
                                 <div
                                     class="comment-content"
                                     id="comment-content"
@@ -136,6 +134,7 @@
                                 <img
                                     class="hover-glow"
                                     src="./assets/icons/sent.png"
+                                    onclick="addComment()"
                                 />
                             </form>
                         </div>
@@ -160,6 +159,6 @@
         </footer>
     </body>
 
-    <script src="assets/Scripts/templatefunction.js"></script>
+    <script src="./assets/Scripts/templatefunction.js"></script>
     <script src="script.js"></script>
 </html>

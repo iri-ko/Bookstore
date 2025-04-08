@@ -154,6 +154,18 @@ footer {
     flex-direction: column;
     font-size: 18px;
 
+    @media (max-width: 1170px) {
+        width: 40%;
+    }
+    
+    @media (max-width: 930px) {
+        width: 50%;
+    }
+
+    @media (max-width: 800px) {
+        width: 80%;
+    }
+
     h3 {
         font-size: 32px;
     }
