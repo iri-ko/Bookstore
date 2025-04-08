@@ -206,6 +206,11 @@ function renderBookCards() {
 
     for (let bookIndex = 0; bookIndex< books.length; bookIndex++) {
         getCardTemplate(bookIndex);
+        
+        let innerCardRef = document.getElementById(`book${bookIndex}`);
+        innerCardRef.innerHTML = "";
+
+        getTitle(bookIndex)
     }
     
 }
