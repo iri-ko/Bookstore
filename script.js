@@ -4,7 +4,7 @@ let books = [
         author: "Clara Meer",
         likes: 1250,
         liked: true,
-        price: 19.99,
+        price: "19,99",
         publishedYear: 2018,
         genre: "Fantasy",
         comments: [
@@ -40,7 +40,7 @@ let books = [
         author: "Maximilian Schwarz",
         likes: 980,
         liked: false,
-        price: 14.5,
+        price: "14,50",
         publishedYear: 2021,
         genre: "Fantasy",
         comments: [],
@@ -50,7 +50,7 @@ let books = [
         author: "Laura Blau",
         likes: 1520,
         liked: true,
-        price: 22.95,
+        price: "22,95",
         publishedYear: 2019,
         genre: "Romantik",
         comments: [
@@ -86,7 +86,7 @@ let books = [
         author: "Alexander Weiss",
         likes: 750,
         liked: false,
-        price: 18.0,
+        price: "18,00",
         publishedYear: 2020,
         genre: "Science-Fiction",
         comments: [
@@ -107,7 +107,7 @@ let books = [
         author: "Sabine Grün",
         likes: 1300,
         liked: true,
-        price: 16.75,
+        price: "16,75",
         publishedYear: 2017,
         genre: "Fantasy",
         comments: [],
@@ -117,7 +117,7 @@ let books = [
         author: "Philipp Silber",
         likes: 890,
         liked: false,
-        price: 12.3,
+        price: "12,30",
         publishedYear: 2022,
         genre: "Science-Fiction",
         comments: [
@@ -138,7 +138,7 @@ let books = [
         author: "Oliver Schwarz",
         likes: 1450,
         liked: true,
-        price: 21.0,
+        price: "21,00",
         publishedYear: 2015,
         genre: "Science-Fiction",
         comments: [
@@ -154,7 +154,7 @@ let books = [
         author: "Elena Gold",
         likes: 920,
         liked: false,
-        price: 17.5,
+        price: "17,50",
         publishedYear: 2020,
         genre: "Fantasy",
         comments: [
@@ -170,7 +170,7 @@ let books = [
         author: "Emilia Rot",
         likes: 1800,
         liked: true,
-        price: 19.99,
+        price: "19,99",
         publishedYear: 2016,
         genre: "Romantik",
         comments: [
@@ -210,21 +210,23 @@ function renderBookCards() {
         innerCardRef.innerHTML = "";
         getTitle(bookIndex);
         getBookImg(bookIndex);
+        getInfoBox(bookIndex);
+        getCommentBox(bookIndex);
     }
-    
+
+}    
+
+function getInfoBox(bookIndex){
+    getBoxTemplate(bookIndex); //create outer container
+    const infoRef = document.getElementById(`book-infos${bookIndex}`);
+    infoRef.innerHTML = ""; 
+    createPriceAndHeart(bookIndex);
+    createGeneralInfo(bookIndex); //author, year, genre
 }
 
-
-
-
-
-// Template Function itself
-
-// within Template function - another one for comments
-
-// loop for Template and within another loop for comments
-// add comment
-
-// like counter
-
-// favorites
+function getCommentBox(bookIndex){
+    getCommentBoxTemplate(bookIndex); // create outer container
+    const commentRef = document.getElementById(`comment-section${bookIndex}`);
+    commentRef.innerHTML = "";
+    renderComments(bookIndex);
+}
