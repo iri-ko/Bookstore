@@ -212,6 +212,7 @@ function renderBookCards() {
         getBookImg(bookIndex);
         getInfoBox(bookIndex);
         getCommentBox(bookIndex);
+        getInputForm(bookIndex);
     }
 
 }    
@@ -222,11 +223,13 @@ function getInfoBox(bookIndex){
     infoRef.innerHTML = ""; 
     createPriceAndHeart(bookIndex);
     createGeneralInfo(bookIndex); //author, year, genre
+
 }
 
 function getCommentBox(bookIndex){
     getCommentBoxTemplate(bookIndex); // create outer container
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
     commentRef.innerHTML = "";
-    renderComments(bookIndex);
+    renderComments(bookIndex); // render commments Loop
 }
+

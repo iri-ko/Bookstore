@@ -101,3 +101,23 @@ function renderComments(bookIndex){
         
     }
 }
+
+function getInputForm(bookIndex){
+    const innerCardRef = document.getElementById(`book${bookIndex}`);
+
+    const inputFormRef = document.createElement("form");
+    inputFormRef.classList.add("padding-20");
+    inputFormRef.innerHTML = `<input
+                                    type="text"
+                                    id="comment-input${bookIndex}"
+                                    required
+                                />
+                                <img
+                                    class="hover-glow"
+                                    src="./assets/icons/sent.png"
+                                    onclick="addComment()"
+                                />`
+
+    innerCardRef.appendChild(inputFormRef);
+}
+
