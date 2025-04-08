@@ -23,6 +23,10 @@
 
 .padding-50 {
     padding: 0px 50px;
+
+    @media (max-width:600px){
+        padding: 20px 
+    }
 }
 
 .hover-glow:hover {
@@ -36,6 +40,9 @@
 
 h2 {
     font-size: 40px;
+    @media (max-width:600px){
+        font-size: 26px;
+    }
 }
 
 header {
@@ -46,6 +53,9 @@ header {
     justify-content: flex-start;
     font-size: 40px;
     border-bottom: solid white 2px;
+    @media (max-width:450px){
+        font-size: 30px;
+    }
 
     #header-bar {
         display: flex;
@@ -61,6 +71,9 @@ header {
 
             img {
                 height: 80px;
+                @media (max-width:450px){
+                    height: 60px;
+                }
             }
         }
     }
@@ -70,8 +83,10 @@ main {
     min-height: calc(100dvh - 120px - 120px);
     background-image: linear-gradient(
         180deg,
-        rgb(99, 11, 77),
-        rgb(116, 83, 78)
+        rgb(63, 16, 82),
+        rgb(94, 22, 128),
+        rgb(88, 10, 75),
+        rgb(88, 10, 62)
     );
     #main-div {
         padding: 50px 0px;
@@ -133,6 +148,10 @@ footer {
             gap: 20px;
             color: rgb(99, 99, 99);
 
+            @media (max-width:700px) {
+                font-size: 12px; 
+            }
+
             img {
                 height: 60px;
             }
@@ -145,6 +164,13 @@ footer {
             gap: 40px;
             font-size: 20px;
 
+            @media (max-width:700px) {
+                font-size: 16px; 
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 10px;
+            }
+
             a:hover {
                 cursor: pointer;
                 text-decoration: underline;
@@ -154,7 +180,7 @@ footer {
 }
 
 .book-card {
-    background-color: rgb(43, 20, 44);
+    background-color: rgb(43, 21, 44);
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.493));
     height: auto;
     width: 30%;
@@ -163,20 +189,24 @@ footer {
     flex-direction: column;
     font-size: 18px;
 
-    @media (max-width: 1170px) {
-        width: 40%;
+    @media (max-width: 1320px) {
+        width: 47%;
     }
     
-    @media (max-width: 930px) {
-        width: 50%;
+    @media (max-width: 1120px) {
+        width: 46%;
     }
 
-    @media (max-width: 800px) {
-        width: 80%;
+    @media (max-width: 930px) {
+        width: 100%;
     }
+
+
 
     h3 {
         font-size: 32px;
+        @media (max-width:600px){
+        font-size: 24px;}
     }
 
     .book-infos {
@@ -206,6 +236,9 @@ footer {
 
                 img {
                     height: 60px;
+                    @media (max-width:450px){
+                        height: 40px;
+                    }
                 }
             }
         }
@@ -262,6 +295,9 @@ footer {
 
         img{
             height: 40px;
+            @media (max-width:450px){
+                height: 30px;
+            }
         }
         
         input {
