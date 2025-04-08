@@ -200,7 +200,14 @@ function init() {
 }
 
 function renderBookCards() {
-    getTitleTemplate();
+
+    const cardRef = document.getElementById("read-books-content");
+    cardRef.innerHTML = "";
+
+    for (let bookIndex = 0; bookIndex< books.length; bookIndex++) {
+        getCardTemplate(bookIndex);
+    }
+    
 }
 
 
