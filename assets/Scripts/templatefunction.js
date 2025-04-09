@@ -19,11 +19,13 @@ function getBookCard(bookIndex) {
             <span class="price" id="price${bookIndex}">${books[bookIndex].price} &euro;</span>
 
             <div id="likes${bookIndex}" class="likes">
-                <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span
-                ><img
+                <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span>
+                <img
                     id="heart-img${bookIndex}"
                     src="assets/icons/empty_heart.png"
                     alt=""
+                    class= "heart-img"
+                    onclick="setLike('heart-img${bookIndex}')"
                 />
             </div>
         </div>
@@ -85,4 +87,28 @@ function getCommentTemplate(commentIndex, bookIndex){
                 >${books[bookIndex].comments[commentIndex].comment}</span
             >
         </div>`
+}
+
+function getAddLikeTemplate(bookIndex){
+    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes + 1}</span>
+                <img
+                    id="heart-img${bookIndex}"
+                    src="assets/icons/full_heart.png"
+                    alt=""
+                    class= "heart-img"
+                    onclick="setLike('heart-img${bookIndex}')"
+                />
+            `
+}
+
+function  getNotLikeTemplate(bookIndex){
+    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span>
+                <img
+                    id="heart-img${bookIndex}"
+                    src="assets/icons/empty_heart.png"
+                    alt=""
+                    class= "heart-img"
+                    onclick="setLike('heart-img${bookIndex}')"
+                />
+            `
 }

@@ -6,7 +6,7 @@ let books = [
         cover: "./assets/img/geheimnisse.png",
         author: "Clara Meer",
         likes: 1250,
-        liked: true,
+        liked: false,
         price: "19,99",
         publishedYear: 2018,
         genre: "Fantasy",
@@ -54,7 +54,7 @@ let books = [
         cover: "./assets/img/himmel.png",
         author: "Laura Blau",
         likes: 1520,
-        liked: true,
+        liked: false,
         price: "22,95",
         publishedYear: 2019,
         genre: "Romantik",
@@ -113,7 +113,7 @@ let books = [
         cover: "./assets/img/waechter.png",
         author: "Sabine Grün",
         likes: 1300,
-        liked: true,
+        liked: false,
         price: "16,75",
         publishedYear: 2017,
         genre: "Fantasy",
@@ -146,7 +146,7 @@ let books = [
         cover: "./assets/img/sterne.png",
         author: "Oliver Schwarz",
         likes: 1450,
-        liked: true,
+        liked: false,
         price: "21,00",
         publishedYear: 2015,
         genre: "Science-Fiction",
@@ -180,7 +180,7 @@ let books = [
         cover: "./assets/img/liebe.png",
         author: "Emilia Rot",
         likes: 1800,
-        liked: true,
+        liked: false,
         price: "19,99",
         publishedYear: 2016,
         genre: "Romantik",
@@ -225,12 +225,13 @@ function renderBookCards() {
         innerCardRef.innerHTML = "";
         innerCardRef.innerHTML += getBookCard(bookIndex);
         
-        rendeCaommentBox(bookIndex);
+        renderCommentBox(bookIndex);
+        renderLikeContainer(bookIndex);
     }
 }
 
 
-function rendeCaommentBox(bookIndex){
+function renderCommentBox(bookIndex){
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
 
     for (let commentIndex = 0; commentIndex < books[bookIndex].comments.length; commentIndex++) {
@@ -239,8 +240,49 @@ function rendeCaommentBox(bookIndex){
 }
 
 
+function setLike(id){
+    const likeIndex = findHeartIndex(id);
+    
+    if (books[likeIndex].liked == false){
+        books[likeIndex].liked = true;
+    }
+    else {
+        books[likeIndex].liked = false;
+    };    
+
+    renderLikeContainer(likeIndex);
+
+}
+
+function findHeartIndex(id){
+    const heartRef = document.getElementById(id);
+    const heartIndex = heartRef.id.replace("heart-img","");
+    return heartIndex
+}
 
 
+
+function renderLikeContainer(bookIndex){
+    const likesRef = document.getElementById(`likes${bookIndex}`);
+    if (books[bookIndex].liked == true){
+        likesRef.innerHTML= getAddLikeTemplate(bookIndex);
+    }
+    else if ((books[bookIndex].liked == false)) {
+        likesRef.innerHTML= getNotLikeTemplate(bookIndex);
+    }
+}
+
+// boolean liked = true
+// render full heart img
+// add 1 to counter
+// push card to liked
+// do not remove from read (because it's read and favorited)
+// liked = false
+// render empty heart img
+// change counter back to liked value
+// remove bookcard from favorited and array
+
+// create array for favrorited - > necessary?
 
 
 
