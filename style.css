@@ -187,6 +187,7 @@ footer {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     font-size: 18px;
 
     @media (max-width: 1320px) {
@@ -228,7 +229,7 @@ footer {
                 color: #d06cbc;
             }
 
-            #likes {
+            .likes {
                 display: flex;
                 align-items: center;
                 font-size: 20px;
@@ -262,8 +263,9 @@ footer {
     .comment-section {
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        padding: 30px 20px;
+        justify-content: flex-start;
+        gap: 30px;
+        padding: 0px 20px;
         height: 200px;
         overflow: auto;
         
@@ -274,7 +276,7 @@ footer {
         .comment-content {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 0px;
             
 
             .reader {

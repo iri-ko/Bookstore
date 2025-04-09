@@ -46,9 +46,9 @@ function getBookCard(bookIndex) {
 
     <h4 class="padding-20">Comments</h4>
 
-    <div
+    <div    
         id="comment-section${bookIndex}"
-        class="comment-section padding-20"
+        class="comment-section"
     >
         <div
             class="comment-content"
