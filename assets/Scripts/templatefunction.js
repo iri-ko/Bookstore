@@ -4,9 +4,10 @@ function getCardTemplate(bookIndex) {
     cardRef.innerHTML += `<div id="book${bookIndex}" class="book-card"></div>`;
 }
 
+
 function getBookCard(bookIndex) {
     return `
-    <h3 class="padding-20">Title</h3>
+    <h3 class="padding-20">${books[bookIndex].name}</h3>
 
     <img src="./assets/img/book.png"/>
 
@@ -15,10 +16,10 @@ function getBookCard(bookIndex) {
             id="price-and-likes${bookIndex}"
             class="price-and-likes"
         >
-            <span class="price" id="price${bookIndex}">Price</span>
+            <span class="price" id="price${bookIndex}">${books[bookIndex].price} &euro;</span>
 
             <div id="likes${bookIndex}" class="likes">
-                <span id="like-counter${bookIndex}">xxxx</span
+                <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span
                 ><img
                     id="heart-img${bookIndex}"
                     src="assets/icons/empty_heart.png"
@@ -30,15 +31,15 @@ function getBookCard(bookIndex) {
         <div id="book-info-list" class="info-list${bookIndex}">
             <div class="info-pair">
                 <span class="bold">Author:</span>
-                <span>Authorname</span>
+                <span>&nbsp;&nbsp;&nbsp;${books[bookIndex].author}</span>
             </div>
             <div class="info-pair">
                 <span class="bold">Year:</span
-                ><span>xxxx</span>
+                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${books[bookIndex].publishedYear}</span>
             </div>
             <div class="info-pair">
                 <span class="bold">Genre:</span
-                ><span>xxxx</span>
+                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${books[bookIndex].genre}</span>
             </div>
         </div>
     </div>
@@ -69,4 +70,19 @@ function getBookCard(bookIndex) {
             onclick="addComment()"
         />
     </form>`
+}
+
+
+function getCommentTemplate(commentIndex, bookIndex){
+    return `<div
+            class="comment-content"
+            id="b${bookIndex}-comment${commentIndex}"
+        >
+            <span class="reader bold" id="reader-b${bookIndex}-comment${commentIndex}"
+                >${books[bookIndex].comments[commentIndex].name}</span
+            >
+            <span class="comment" id="comment-b${bookIndex}-comment${commentIndex}"
+                >${books[bookIndex].comments[commentIndex].comment}</span
+            >
+        </div>`
 }

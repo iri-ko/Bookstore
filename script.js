@@ -203,6 +203,7 @@ function init() {
     renderBookCards();
 }
 
+
 function renderBookCards() {
 
     const cardRef = document.getElementById("read-books-content");
@@ -214,8 +215,21 @@ function renderBookCards() {
 
         innerCardRef.innerHTML = "";
         innerCardRef.innerHTML += getBookCard(bookIndex);
+        
+        rendeCaommentBox(bookIndex);
     }
+}
 
-}    
+
+function rendeCaommentBox(bookIndex){
+    const commentRef = document.getElementById(`comment-section${bookIndex}`);
+
+    for (let commentIndex = 0; commentIndex < books[bookIndex].comments.length; commentIndex++) {
+            commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
+    } 
+}
+
+
+
 
 
