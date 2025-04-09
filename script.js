@@ -1,3 +1,5 @@
+// #region meeine Variabeln
+
 let books = [
     {
         name: "Die Geheimnisse des Ozeans",
@@ -195,6 +197,8 @@ let books = [
 
 let currentBook = 0;
 
+// #endregion
+
 function init() {
     renderBookCards();
 }
@@ -207,29 +211,11 @@ function renderBookCards() {
     for (let bookIndex = 0; bookIndex< books.length; bookIndex++) {
         getCardTemplate(bookIndex);
         const innerCardRef = document.getElementById(`book${bookIndex}`);
+
         innerCardRef.innerHTML = "";
-        getTitle(bookIndex);
-        getBookImg(bookIndex);
-        getInfoBox(bookIndex);
-        getCommentBox(bookIndex);
-        getInputForm(bookIndex);
+        innerCardRef.innerHTML += getBookCard(bookIndex);
     }
 
 }    
 
-function getInfoBox(bookIndex){
-    getBoxTemplate(bookIndex); //create outer container
-    const infoRef = document.getElementById(`book-infos${bookIndex}`);
-    infoRef.innerHTML = ""; 
-    createPriceAndHeart(bookIndex);
-    createGeneralInfo(bookIndex); //author, year, genre
-
-}
-
-function getCommentBox(bookIndex){
-    getCommentBoxTemplate(bookIndex); // create outer container
-    const commentRef = document.getElementById(`comment-section${bookIndex}`);
-    commentRef.innerHTML = "";
-    renderComments(bookIndex); // render commments Loop
-}
 
