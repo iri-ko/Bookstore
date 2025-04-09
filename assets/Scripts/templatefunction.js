@@ -9,7 +9,7 @@ function getBookCard(bookIndex) {
     return `
     <h3 class="padding-20">${books[bookIndex].name}</h3>
 
-    <img src="./assets/img/book.png"/>
+    <img class= "book-img" src="${books[bookIndex].cover}"/>
 
     <div id="book-infos${bookIndex}" class="book-infos padding-20">
         <div

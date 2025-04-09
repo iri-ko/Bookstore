@@ -3,6 +3,7 @@
 let books = [
     {
         name: "Die Geheimnisse des Ozeans",
+        cover: "./assets/img/geheimnisse.png",
         author: "Clara Meer",
         likes: 1250,
         liked: true,
@@ -39,6 +40,7 @@ let books = [
     },
     {
         name: "Der vergessene Pfad",
+        cover: "./assets/img/pfad.png",
         author: "Maximilian Schwarz",
         likes: 980,
         liked: false,
@@ -49,6 +51,7 @@ let books = [
     },
     {
         name: "Die Farben des Himmels",
+        cover: "./assets/img/himmel.png",
         author: "Laura Blau",
         likes: 1520,
         liked: true,
@@ -85,6 +88,7 @@ let books = [
     },
     {
         name: "Das Rätsel der Zeit",
+        cover: "./assets/img/zeit.png",
         author: "Alexander Weiss",
         likes: 750,
         liked: false,
@@ -106,6 +110,7 @@ let books = [
     },
     {
         name: "Der letzte Wächter",
+        cover: "./assets/img/waechter.png",
         author: "Sabine Grün",
         likes: 1300,
         liked: true,
@@ -116,6 +121,7 @@ let books = [
     },
     {
         name: "Im Schatten des Mondes",
+        cover: "./assets/img/mond.png",
         author: "Philipp Silber",
         likes: 890,
         liked: false,
@@ -137,6 +143,7 @@ let books = [
     },
     {
         name: "Jenseits der Sterne",
+        cover: "./assets/img/sterne.png",
         author: "Oliver Schwarz",
         likes: 1450,
         liked: true,
@@ -153,6 +160,7 @@ let books = [
     },
     {
         name: "Das verborgene Königreich",
+        cover: "./assets/img/reich.png",
         author: "Elena Gold",
         likes: 920,
         liked: false,
@@ -169,6 +177,7 @@ let books = [
     },
     {
         name: "Liebe in Zeiten des Krieges",
+        cover: "./assets/img/liebe.png",
         author: "Emilia Rot",
         likes: 1800,
         liked: true,
@@ -228,6 +237,8 @@ function rendeCaommentBox(bookIndex){
             commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
     } 
 }
+
+
 
 
 

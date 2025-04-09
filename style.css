@@ -210,11 +210,18 @@ footer {
         font-size: 24px;}
     }
 
+    .book-img {
+        border-top: solid white 4px;
+        border-bottom: solid white 4px;
+        height: 30%;
+        width: 100%;
+        object-fit: cover;
+    }
+
     .book-infos {
         display: flex;
         flex-direction: column;
         gap: 40px;
-        border-top: solid white 4px;
         border-bottom: solid white 4px;
         padding-bottom: 40px;
 
@@ -312,3 +319,5 @@ footer {
         }
     }
 }
+
+
