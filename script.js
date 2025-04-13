@@ -294,14 +294,20 @@ function setLike(id) {
         addToFavoriteBooks(likeIndex);
     } else if ((books[likeIndex].liked = true)) {
         books[likeIndex].liked = false;
+        removeFromFavoriteBooks(likeIndex);
     }
 
     renderLikeContainer(likeIndex);
     renderFavoriteBookCards();
+    renderLikeContainer(likeIndex);
 }
 
 function addToFavoriteBooks(likeIndex) {
     favoriteBooks.push(books[likeIndex]);
+}
+
+function removeFromFavoriteBooks(likeIndex){
+    favoriteBooks.splice(likeIndex, 1);
 }
 
 function findHeartIndex(id) {
