@@ -213,7 +213,6 @@ function init() {
     renderBookCards();
 }
 
-
 function renderBookCards() {
     const cardRef = document.getElementById("read-books-content");
     cardRef.innerHTML = "";
@@ -230,7 +229,6 @@ function renderBookCards() {
     }
 }
 
-
 function renderFavoriteBookCards() {
     const favCardRef = document.getElementById("favorite-books-content");
 
@@ -243,6 +241,17 @@ function renderFavoriteBookCards() {
     }
 }
 
+//change between justify-contentflex start or space between depending on number of books liked
+function toggleJustifyContentClass(){
+    const favCardRef = document.getElementById("favorite-books-content");
+    if (favoriteBooks.length <= 2) {
+        favCardRef.classList.add("justify-start");
+        favCardRef.classList.remove("justify-sp-between");
+    } else {
+        favCardRef.classList.add("justify-sp-between");
+        favCardRef.classList.remove("justify-start");
+    }
+}
 
 function renderFavoriteBookCardsLoop() {
     for (
@@ -261,8 +270,8 @@ function renderFavoriteBookCardsLoop() {
 
         renderCommentBox(favBookIndex);
     }
+    toggleJustifyContentClass()
 }
-
 
 function renderCommentBox(bookIndex) {
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
@@ -275,7 +284,6 @@ function renderCommentBox(bookIndex) {
         commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
     }
 }
-
 
 function setLike(id) {
     const likeIndex = findHeartIndex(id);

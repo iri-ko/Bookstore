@@ -29,10 +29,15 @@
     }
 }
 
-.justify-start {
-    display: flex;
+.justify-start{
     justify-content: flex-start;
 }
+
+.justify-sp-between{
+    justify-content: space-between;
+}
+
+
 
 .hover-glow:hover {
     cursor: pointer;
@@ -127,11 +132,12 @@ main {
             }
 
         .sort-favorite-book-cards{
-                display: flex;
-                justify-content: flex-start;
+            display: flex;
                 flex-wrap: wrap;
-                gap: 60px;
+                gap: 70px;
         }
+        
+
     }
 }
 
