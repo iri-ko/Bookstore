@@ -268,7 +268,7 @@ function renderFavoriteBookCardsLoop() {
         innerFavCardRef.innerHTML = "";
         innerFavCardRef.innerHTML += getFavBookCard(favBookIndex);
 
-        renderCommentBox(favBookIndex);
+        renderFavCommentBox(favBookIndex);
     }
     toggleJustifyContentClass();
 }
@@ -281,6 +281,17 @@ function renderCommentBox(bookIndex) {
         commentIndex++
     ) {
         commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
+    }
+}
+
+function renderFavCommentBox(favBookIndex) {
+    const commentRef = document.getElementById(`comment-section${favBookIndex}`);
+    for (
+        let FavCommentIndex = 0;
+        FavCommentIndex < favoriteBooks[favBookIndex].comments.length;
+        FavCommentIndex++
+    ) {
+        commentRef.innerHTML += getFavCommentTemplate(FavCommentIndex, favBookIndex);
     }
 }
 

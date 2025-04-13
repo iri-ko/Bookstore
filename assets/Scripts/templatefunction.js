@@ -89,6 +89,20 @@ function getCommentTemplate(commentIndex, bookIndex){
         </div>`
 }
 
+function getFavCommentTemplate(FavCommentIndex, favBookIndex){
+    return `<div
+            class="comment-content"
+            id="b${favBookIndex}-comment${FavCommentIndex}"
+        >
+            <span class="reader bold" id="reader-b${favBookIndex}-comment${FavCommentIndex}"
+                >${favoriteBooks[favBookIndex].comments[FavCommentIndex].name}</span
+            >
+            <span class="comment" id="comment-b${favBookIndex}-comment${favBookIndex}"
+                >${favoriteBooks[favBookIndex].comments[FavCommentIndex].comment}</span
+            >
+        </div>`
+}
+
 function getAddLikeTemplate(bookIndex){
     return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes + 1}</span>
                 <img
