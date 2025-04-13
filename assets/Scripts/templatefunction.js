@@ -102,7 +102,7 @@ function getAddLikeTemplate(bookIndex){
 }
 
 function  getNotLikeTemplate(bookIndex){
-    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes + 1}</span>
+    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span>
                 <img
                     id="heart-img${bookIndex}"
                     src="assets/icons/empty_heart.png"
@@ -116,7 +116,7 @@ function  getNotLikeTemplate(bookIndex){
 function getFavBookContainer(favBookIndex){
     const FavCardRef = document.getElementById("favorite-books-content");
 
-    FavCardRef.innerHTML += `<div id="favorite-book${favBookIndex}" class="book-card"></div>`;
+    FavCardRef.innerHTML += `<div id="favorite-book${favBookIndex}" class="border-pink book-card"></div>`;
 }
 
 function getFavBookCard(favBookIndex) {

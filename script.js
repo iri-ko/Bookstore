@@ -294,9 +294,9 @@ function setLike(id) {
     } else {
         books[likeIndex].liked = false;
     }
-
-    renderFavoriteBookCards();
     renderLikeContainer(likeIndex);
+    renderFavoriteBookCards();
+    
 }
 
 function addToFavoriteBooks(likeIndex) {
@@ -311,7 +311,6 @@ function findHeartIndex(id) {
 
 function renderLikeContainer(bookIndex) {
     const likesRef = document.getElementById(`likes${bookIndex}`);
-    const innerCardRef = document.getElementById(`book${bookIndex}`);
     if (books[bookIndex].liked == true) {
         likesRef.innerHTML = getAddLikeTemplate(bookIndex);
     } else if (books[bookIndex].liked == false) {
@@ -319,8 +318,8 @@ function renderLikeContainer(bookIndex) {
     }
 }
 
-// boolean liked = true
-// push card to liked
+//fix issue with like counter
+//fix issue with full heart not going full on liked books when liking
 // do not remove from read (because it's read and favorited)
 // liked = false
 // render empty heart img
