@@ -102,7 +102,7 @@ function getAddLikeTemplate(bookIndex){
 }
 
 function  getNotLikeTemplate(bookIndex){
-    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span>
+    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes + 1}</span>
                 <img
                     id="heart-img${bookIndex}"
                     src="assets/icons/empty_heart.png"
@@ -111,4 +111,79 @@ function  getNotLikeTemplate(bookIndex){
                     onclick="setLike('heart-img${bookIndex}')"
                 />
             `
+}
+
+function getFavBookContainer(favBookIndex){
+    const FavCardRef = document.getElementById("favorite-books-content");
+
+    FavCardRef.innerHTML += `<div id="favorite-book${favBookIndex}" class="book-card"></div>`;
+}
+
+function getFavBookCard(favBookIndex) {
+    return `
+    <h3 class="padding-20">${favoriteBooks[favBookIndex].name}</h3>
+
+    <img class= "book-img" src="${favoriteBooks[favBookIndex].cover}"/>
+
+    <div id="book-infos${favBookIndex}" class="book-infos padding-20">
+        <div
+            id="price-and-likes${favBookIndex}"
+            class="price-and-likes"
+        >
+            <span class="price" id="price${favBookIndex}">${favoriteBooks[favBookIndex].price} &euro;</span>
+
+            <div id="likes${favBookIndex}" class="likes">
+                <span id="like-counter${favBookIndex}">${favoriteBooks[favBookIndex].likes + 1}</span>
+                <img
+                    id="heart-img${favBookIndex}"
+                    src="assets/icons/full_heart.png"
+                    alt=""
+                    class= "heart-img"
+                    onclick="setLike('heart-img${favBookIndex}')"
+                />
+            </div>
+        </div>
+
+        <div id="book-info-list" class="info-list${favBookIndex}">
+            <div class="info-pair">
+                <span class="bold">Author:</span>
+                <span>&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].author}</span>
+            </div>
+            <div class="info-pair">
+                <span class="bold">Year:</span
+                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].publishedYear}</span>
+            </div>
+            <div class="info-pair">
+                <span class="bold">Genre:</span
+                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].genre}</span>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="padding-20">Comments</h4>
+
+    <div    
+        id="comment-section${favBookIndex}"
+        class="comment-section"
+    >
+        <div
+            class="comment-content"
+            id="comment-content${favBookIndex}"
+        >
+
+        </div>
+    </div>
+
+    <form class="padding-20">
+        <input
+            type="text"
+            id="comment-input${favBookIndex}"
+            required
+        />
+        <img
+            class="hover-glow"
+            src="./assets/icons/sent.png"
+            onclick="addComment()"
+        />
+    </form>`
 }

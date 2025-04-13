@@ -204,77 +204,114 @@ let books = [
     },
 ];
 
-let currentBook = 0;
+let favoriteBooks = [];
 
 // #endregion
 
 function init() {
+    renderFavoriteBookCards();
     renderBookCards();
 }
 
 
 function renderBookCards() {
-
     const cardRef = document.getElementById("read-books-content");
     cardRef.innerHTML = "";
 
-    for (let bookIndex = 0; bookIndex< books.length; bookIndex++) {
+    for (let bookIndex = 0; bookIndex < books.length; bookIndex++) {
         getCardTemplate(bookIndex);
         const innerCardRef = document.getElementById(`book${bookIndex}`);
 
         innerCardRef.innerHTML = "";
         innerCardRef.innerHTML += getBookCard(bookIndex);
-        
+
         renderCommentBox(bookIndex);
         renderLikeContainer(bookIndex);
     }
 }
 
 
-function renderCommentBox(bookIndex){
+function renderFavoriteBookCards() {
+    const favCardRef = document.getElementById("favorite-books-content");
+
+    //show inner html - either show liked books or hint that no books hae been liked
+    if (favoriteBooks.length == 0) {
+        favCardRef.innerHTML = "Du hast noch keine Bücher geliked.";
+    } else {
+        favCardRef.innerHTML = "";
+        renderFavoriteBookCardsLoop();
+    }
+}
+
+
+function renderFavoriteBookCardsLoop() {
+    for (
+        let favBookIndex = 0;
+        favBookIndex < favoriteBooks.length;
+        favBookIndex++
+    ) {
+        getFavBookContainer(favBookIndex);
+
+        const innerFavCardRef = document.getElementById(
+            `favorite-book${favBookIndex}`
+        );
+
+        innerFavCardRef.innerHTML = "";
+        innerFavCardRef.innerHTML += getFavBookCard(favBookIndex);
+
+        renderCommentBox(favBookIndex);
+    }
+}
+
+
+function renderCommentBox(bookIndex) {
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
 
-    for (let commentIndex = 0; commentIndex < books[bookIndex].comments.length; commentIndex++) {
-            commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
-    } 
+    for (
+        let commentIndex = 0;
+        commentIndex < books[bookIndex].comments.length;
+        commentIndex++
+    ) {
+        commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
+    }
 }
 
 
-function setLike(id){
+function setLike(id) {
     const likeIndex = findHeartIndex(id);
-    
-    if (books[likeIndex].liked == false){
+
+    if (books[likeIndex].liked == false) {
         books[likeIndex].liked = true;
-    }
-    else {
+        addToFavoriteBooks(likeIndex);
+    } else {
         books[likeIndex].liked = false;
-    };    
-
-    renderLikeContainer(likeIndex);
-
-}
-
-function findHeartIndex(id){
-    const heartRef = document.getElementById(id);
-    const heartIndex = heartRef.id.replace("heart-img","");
-    return heartIndex
-}
-
-
-
-function renderLikeContainer(bookIndex){
-    const likesRef = document.getElementById(`likes${bookIndex}`);
-    if (books[bookIndex].liked == true){
-        likesRef.innerHTML= getAddLikeTemplate(bookIndex);
     }
-    else if ((books[bookIndex].liked == false)) {
-        likesRef.innerHTML= getNotLikeTemplate(bookIndex);
+
+    renderFavoriteBookCards();
+    renderLikeContainer(likeIndex);
+}
+
+function addToFavoriteBooks(likeIndex) {
+    favoriteBooks.push(books[likeIndex]);
+}
+
+function findHeartIndex(id) {
+    const heartRef = document.getElementById(id);
+    const heartIndex = heartRef.id.replace("heart-img", "");
+    return heartIndex;
+}
+
+function renderLikeContainer(bookIndex) {
+    const likesRef = document.getElementById(`likes${bookIndex}`);
+    const innerCardRef = document.getElementById(`book${bookIndex}`);
+    if (books[bookIndex].liked == true) {
+        likesRef.innerHTML = getAddLikeTemplate(bookIndex);
+    } else if (books[bookIndex].liked == false) {
+        likesRef.innerHTML = getNotLikeTemplate(bookIndex);
     }
 }
 
 // boolean liked = true
-// render full heart img
-// add 1 to counter
 // push card to liked
 // do not remove from read (because it's read and favorited)
 // liked = false
@@ -283,6 +320,3 @@ function renderLikeContainer(bookIndex){
 // remove bookcard from favorited and array
 
 // create array for favrorited - > necessary?
-
-
-
