@@ -46,7 +46,7 @@ function getBookCard(bookIndex) {
         </div>
     </div>
 
-    <h4 class="padding-20">Comments</h4>
+    <h4 class="padding-20">Kommentare</h4>
 
     <div    
         id="comment-section${bookIndex}"
@@ -160,7 +160,7 @@ function getFavBookCard(favBookIndex) {
         </div>
     </div>
 
-    <h4 class="padding-20">Comments</h4>
+    <h4 class="padding-20">Kommentare</h4>
 
     <div    
         id="comment-section${favBookIndex}"

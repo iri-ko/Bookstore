@@ -211,7 +211,6 @@ let favoriteBooks = [];
 function init() {
     renderBookCards();
     renderFavoriteBookCards();
-    
 }
 
 function renderBookCards() {
@@ -276,7 +275,6 @@ function renderFavoriteBookCardsLoop() {
 
 function renderCommentBox(bookIndex) {
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
-
     for (
         let commentIndex = 0;
         commentIndex < books[bookIndex].comments.length;
@@ -288,7 +286,6 @@ function renderCommentBox(bookIndex) {
 
 function setLike(id) {
     const likeIndex = findHeartIndex(id);
-
     if (books[likeIndex].liked == false) {
         books[likeIndex].liked = true;
         addToFavoriteBooks(likeIndex);
@@ -296,7 +293,6 @@ function setLike(id) {
         books[likeIndex].liked = false;
         removeFromFavoriteBooks(likeIndex);
     }
-
     renderLikeContainer(likeIndex);
     renderFavoriteBookCards();
     renderLikeContainer(likeIndex);
@@ -306,7 +302,7 @@ function addToFavoriteBooks(likeIndex) {
     favoriteBooks.push(books[likeIndex]);
 }
 
-function removeFromFavoriteBooks(likeIndex){
+function removeFromFavoriteBooks(likeIndex) {
     favoriteBooks.splice(likeIndex, 1);
 }
 
@@ -325,7 +321,12 @@ function renderLikeContainer(bookIndex) {
     }
 }
 
-// liked = false
-// render empty heart img
-// change counter back to liked value
-// remove bookcard from favorited array
+
+
+//addComment
+//Input-Feld auslesen
+// Wert speichern
+//Wert und Author(erstmal Hardcoden) den Comments array hinzufügen
+//
+//Kommentare neu laden
+//Update sowohl in normaler Like Liste als auch in Favorite (am besten beides neu laden?)
