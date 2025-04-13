@@ -209,8 +209,9 @@ let favoriteBooks = [];
 // #endregion
 
 function init() {
-    renderFavoriteBookCards();
     renderBookCards();
+    renderFavoriteBookCards();
+    
 }
 
 function renderBookCards() {
@@ -242,7 +243,7 @@ function renderFavoriteBookCards() {
 }
 
 //change between justify-contentflex start or space between depending on number of books liked
-function toggleJustifyContentClass(){
+function toggleJustifyContentClass() {
     const favCardRef = document.getElementById("favorite-books-content");
     if (favoriteBooks.length <= 2) {
         favCardRef.classList.add("justify-start");
@@ -270,7 +271,7 @@ function renderFavoriteBookCardsLoop() {
 
         renderCommentBox(favBookIndex);
     }
-    toggleJustifyContentClass()
+    toggleJustifyContentClass();
 }
 
 function renderCommentBox(bookIndex) {
@@ -291,12 +292,12 @@ function setLike(id) {
     if (books[likeIndex].liked == false) {
         books[likeIndex].liked = true;
         addToFavoriteBooks(likeIndex);
-    } else {
+    } else if ((books[likeIndex].liked = true)) {
         books[likeIndex].liked = false;
     }
+
     renderLikeContainer(likeIndex);
     renderFavoriteBookCards();
-    
 }
 
 function addToFavoriteBooks(likeIndex) {
@@ -318,12 +319,7 @@ function renderLikeContainer(bookIndex) {
     }
 }
 
-//fix issue with like counter
-//fix issue with full heart not going full on liked books when liking
-// do not remove from read (because it's read and favorited)
 // liked = false
 // render empty heart img
 // change counter back to liked value
-// remove bookcard from favorited and array
-
-// create array for favrorited - > necessary?
+// remove bookcard from favorited array
