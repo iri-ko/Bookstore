@@ -69,7 +69,8 @@ function getBookCard(bookIndex) {
         <img
             class="hover-glow"
             src="./assets/icons/sent.png"
-            onclick="addComment()"
+            onclick="addComment('comment-input${bookIndex}')"
+
         />
     </form>`
 }

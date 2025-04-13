@@ -332,6 +332,50 @@ function renderLikeContainer(bookIndex) {
     }
 }
 
+function addComment(id) {
+    const inputRef = document.getElementById(id);
+
+    const inputIndex = inputRef.id.replace("comment-input", "");
+
+    pushComment(inputIndex, inputRef);
+
+    const commentRef = document.getElementById(`comment-section${inputIndex}`);
+    commentRef.innerHTML= "";   
+
+
+    renderBookCards();
+    renderFavoriteBookCards();
+}
+
+function pushComment(inputIndex, inputRef) {
+    const newComment = createCommentsObject(inputRef);
+
+    books[inputIndex].comments.push(newComment);
+
+    const favoriteBook = favoriteBooks.find(book => book.name === books[inputIndex].name);
+    if (favoriteBook) {
+        favoriteBook.comments.push(newComment);
+    } else {
+        return
+    }
+
+}
+
+function createCommentsObject(inputRef) {
+    const nameInput = "CurrentUser"; // Replace with dynamic username later
+    const commentInput = inputRef.value.trim();
+
+    const newComment = {
+        name: nameInput,
+        comment: commentInput,
+    };
+
+    return newComment;
+}
+
+
+
+
 
 
 //addComment
