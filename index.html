@@ -22,11 +22,11 @@
 
     <body onload="init()">
 
-        <section id="overlay" class="max-width-1920 d-flex">
+        <section id="overlay" class="max-width-1920 d-flex padding-50">
             <div class="overlay-content"></div>
             <img class="overlay-img" src="./assets/img/logo.png">
             <h2>Willkommen zurück bei BookBloom!</h2>
-            <h4>Gib deinen Usernamen ein:</h4>
+            <h4>Bitte gib deinen Usernamen ein:</h4>
             <form><input
                 type="text"
                 id="userName-input"
@@ -36,7 +36,7 @@
             <img
                 class="hover-glow"
                 src="./assets/icons/sent.png"
-                onclick="addUserName()"
+                onclick="toggleOverlayVisibility()"
             />
         </form>
 

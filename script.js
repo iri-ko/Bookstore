@@ -411,13 +411,8 @@ function loadFromLocalStorage(key) {
 
 //#region Username functionality
 
-function addUserName(){
-    toggleVisibility();
-    console.log(userNameRef.value);
-    
-}
 
-function toggleVisibility(){
+function toggleOverlayVisibility(){
     const overlayRef = document.getElementById('overlay')
     overlayRef.classList.remove('d-flex');
     overlayRef.classList.add('d-none');
