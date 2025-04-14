@@ -206,6 +206,9 @@ let books = [
 
 let favoriteBooks = [];
 
+const userNameRef = document.getElementById('userName-input');
+
+
 // #endregion
 
 function init() {
@@ -345,6 +348,7 @@ function renderLikeContainer(bookIndex) {
     }
 }
 
+
 //#endregion
 
 // #region comment functions
@@ -376,7 +380,7 @@ function pushComment(inputIndex, inputRef) {
 }
 
 function createCommentsObject(inputRef) {
-    const nameInput = "CurrentUser"; // Replace with dynamic username later
+    const nameInput = userNameRef.value // Replace with dynamic username later
     const commentInput = inputRef.value.trim(); //get and safe comment
 
     //creating new object to push to both arrays
@@ -389,7 +393,6 @@ function createCommentsObject(inputRef) {
 }
 
 //#endregion
-
 
 //#region Local Storage
 function saveToLocalStorage(key, data) {
@@ -406,11 +409,12 @@ function loadFromLocalStorage(key) {
 }
 //#endregion
 
-
 //#region Username functionality
 
 function addUserName(){
     toggleVisibility();
+    console.log(userNameRef.value);
+    
 }
 
 function toggleVisibility(){
