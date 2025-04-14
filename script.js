@@ -406,3 +406,17 @@ function loadFromLocalStorage(key) {
 }
 //#endregion
 
+
+//#region Username functionality
+
+function addUserName(){
+    toggleVisibility();
+}
+
+function toggleVisibility(){
+    const overlayRef = document.getElementById('overlay')
+    overlayRef.classList.remove('d-flex');
+    overlayRef.classList.add('d-none');
+}
+
+//#endregion
