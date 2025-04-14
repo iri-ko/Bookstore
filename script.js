@@ -1,4 +1,4 @@
-// #region meeine Variabeln
+// #region Arrays
 
 let books = [
     {
@@ -209,9 +209,16 @@ let favoriteBooks = [];
 // #endregion
 
 function init() {
+    const savedBooks = loadFromLocalStorage("books");
+    const savedFavoriteBooks = loadFromLocalStorage("favoriteBooks");
+
+    if (savedBooks) books = savedBooks; 
+    if (savedFavoriteBooks) favoriteBooks = savedFavoriteBooks;
+
     renderBookCards();
     renderFavoriteBookCards();
 }
+// #region render functions
 
 function renderBookCards() {
     const cardRef = document.getElementById("read-books-content");
@@ -295,6 +302,10 @@ function renderFavCommentBox(favBookIndex) {
     }
 }
 
+// #endregion
+
+// #region Like Functions
+
 function setLike(id) {
     const likeIndex = findHeartIndex(id);
     if (books[likeIndex].liked == false) {
@@ -311,10 +322,12 @@ function setLike(id) {
 
 function addToFavoriteBooks(likeIndex) {
     favoriteBooks.push(books[likeIndex]);
+    saveToLocalStorage("favoriteBooks", favoriteBooks);
 }
 
 function removeFromFavoriteBooks(likeIndex) {
     favoriteBooks.splice(likeIndex, 1);
+    saveToLocalStorage("favoriteBooks", favoriteBooks);
 }
 
 function findHeartIndex(id) {
@@ -332,39 +345,41 @@ function renderLikeContainer(bookIndex) {
     }
 }
 
+//#endregion
+
+// #region comment functions
+
 function addComment(id) {
-    const inputRef = document.getElementById(id);
+    const inputRef = document.getElementById(id); //from rendered containers
 
-    const inputIndex = inputRef.id.replace("comment-input", "");
-
+    const inputIndex = inputRef.id.replace("comment-input", ""); //to get Index, to find book in array
+    
     pushComment(inputIndex, inputRef);
 
     const commentRef = document.getElementById(`comment-section${inputIndex}`);
-    commentRef.innerHTML= "";   
+    commentRef.innerHTML= "";   //empty comment box to avoid double comments
 
 
     renderBookCards();
     renderFavoriteBookCards();
+    
+
 }
 
 function pushComment(inputIndex, inputRef) {
     const newComment = createCommentsObject(inputRef);
-
     books[inputIndex].comments.push(newComment);
 
-    const favoriteBook = favoriteBooks.find(book => book.name === books[inputIndex].name);
-    if (favoriteBook) {
-        favoriteBook.comments.push(newComment);
-    } else {
-        return
-    }
-
+    // Save updated books and favoriteBooks arrays to local storage
+    saveToLocalStorage("books", books);
+    saveToLocalStorage("favoriteBooks", favoriteBooks);
 }
 
 function createCommentsObject(inputRef) {
     const nameInput = "CurrentUser"; // Replace with dynamic username later
-    const commentInput = inputRef.value.trim();
+    const commentInput = inputRef.value.trim(); //get and safe comment
 
+    //creating new object to push to both arrays
     const newComment = {
         name: nameInput,
         comment: commentInput,
@@ -373,15 +388,21 @@ function createCommentsObject(inputRef) {
     return newComment;
 }
 
+//#endregion
 
 
+//#region Local Storage
+function saveToLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data)); // Convert data to JSON string and save
+}
 
+function loadFromLocalStorage(key) {
+    const data = localStorage.getItem(key); // Retrieve the JSON string
+    if (data) {
+        return JSON.parse(data); // Parse the JSON string if data exists
+    } else {
+        return null; // Return null if data is falsy
+    }
+}
+//#endregion
 
-
-//addComment
-//Input-Feld auslesen
-// Wert speichern
-//Wert und Author(erstmal Hardcoden) den Comments array hinzufügen
-//
-//Kommentare neu laden
-//Update sowohl in normaler Like Liste als auch in Favorite (am besten beides neu laden?)

@@ -138,7 +138,7 @@ function getFavBookCard(favBookIndex) {
     return `
     <h3 class="padding-20">${favoriteBooks[favBookIndex].name}</h3>
 
-    <img class= "book-img" src="${favoriteBooks[favBookIndex].cover}"/>
+    <img class="book-img" src="${favoriteBooks[favBookIndex].cover}"/>
 
     <div id="book-infos${favBookIndex}" class="book-infos padding-20">
         <div
@@ -173,32 +173,7 @@ function getFavBookCard(favBookIndex) {
                 ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].genre}</span>
             </div>
         </div>
-    </div>
+    </div>`
 
-    <h4 class="padding-20">Kommentare</h4>
 
-    <div    
-        id="comment-section${favBookIndex}"
-        class="comment-section"
-    >
-        <div
-            class="comment-content"
-            id="comment-content${favBookIndex}"
-        >
-
-        </div>
-    </div>
-
-    <form class="padding-20">
-        <input
-            type="text"
-            id="comment-input${favBookIndex}"
-            required
-        />
-        <img
-            class="hover-glow"
-            src="./assets/icons/sent.png"
-            onclick="addComment()"
-        />
-    </form>`
 }
