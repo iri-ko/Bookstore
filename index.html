@@ -21,6 +21,28 @@
     </head>
 
     <body onload="init()">
+
+        <section id="overlay" class="max-width-1920 d-flex">
+            <div class="overlay-content"></div>
+            <img class="overlay-img" src="./assets/img/logo.png">
+            <h2>Willkommen zurück bei BookBloom!</h2>
+            <h4>Gib deinen Usernamen ein:</h4>
+            <form><input
+                type="text"
+                id="userName-input"
+                placeholder="Dein Username"
+                required
+            />
+            <img
+                class="hover-glow"
+                src="./assets/icons/sent.png"
+                onclick="addUserName()"
+            />
+        </form>
+
+        </section>
+
+
         <header class="bg-header-footer padding-50">
             <div id="header-bar" class="max-width-1920">
                 <div id="logo">
