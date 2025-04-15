@@ -239,13 +239,13 @@ function renderFavoriteBookCards() {
     if (likedBooksCount === 0) {
         favCardRef.innerHTML = "Du hast noch keine Bücher geliked."; // if no books have been liked, this will be displayed
     }
-    toggleJustifyContentClass(likedBooksCount); // Adjust layout
+    toggleJustifyContentClass(likedBooksCount); // adjust layout
 }
 
 function clearFavoriteBooksSection() {
     const favCardRef = document.getElementById("favorite-books-content");
     favCardRef.innerHTML = ""; // empty container to avoid double rendering
-    return favCardRef; // Return empty container
+    return favCardRef; // return empty container
 }
 
 function handleLikedBooks(favCardRef) {
@@ -253,7 +253,7 @@ function handleLikedBooks(favCardRef) {
     for (let index = 0; index < books.length; index++) {
         if (books[index].liked) {
             likedBooksCount++; //add plus 1 to counter
-            renderSingleFavoriteBookCard(index, favCardRef); // Render each card
+            renderSingleFavoriteBookCard(index, favCardRef); // render each card
         }
     }
     return likedBooksCount; // Return count for further processing
@@ -284,14 +284,7 @@ function toggleJustifyContentClass(likedBooksCount) {
 
 // iliterate through each book and render depending on each sinlge book.
 // anonymous because it's only used once, and thus doesn't need a name.
-books.forEach(function (_, currentIndex) {
-    getCardTemplate(currentIndex); //create outside countainer
-    const innerCardRef = document.getElementById(`book${currentIndex}`); //access outside container
-    innerCardRef.innerHTML = ""; //empty outside ctonainer to avoid double rendering
-    innerCardRef.innerHTML += getBookCard(currentIndex); // fill ith template function
-    renderCommentBox(currentIndex);
-    renderLikeContainer(currentIndex);
-});
+
 
 function renderCommentBox(bookIndex) {
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
@@ -310,12 +303,23 @@ function renderCommentBox(bookIndex) {
 
 function setLike(id) {
     const likeIndex = findHeartIndex(id);
-    books[likeIndex].liked = !books[likeIndex].liked; //toggle liked status (shortcut for if/else)
-    saveToLocalStorage("books", books); //save updated books array to local storage
-    renderBookCards(); // re-render main book cards
-    renderFavoriteBookCards(); // re-render favorite book cards
-    renderLikeContainer(likeIndex);
+    books[likeIndex].liked = !books[likeIndex].liked; // Toggle liked status
+    saveToLocalStorage("books", books); // Save updated books array to local storage
+    renderSingleLikeContainer(likeIndex); // Render like container for the specific book
+    renderFavoriteBookCards(); // Re-render favorite book cards section;
+    renderSingleLikeContainer(likeIndex);
 }
+
+function renderSingleLikeContainer(bookIndex) {
+    const likesRef = document.getElementById(`likes${bookIndex}`); // access like container
+    likesRef.innerHTML = ""; // clear the content to avoid double rendering
+    if (books[bookIndex].liked == true) {
+        likesRef.innerHTML = getAddLikeTemplate(bookIndex); // render favLike template
+    } else if (books[bookIndex].liked == false) {
+        likesRef.innerHTML = getNotLikeTemplate(bookIndex); // render not liked template
+    }
+}
+
 function findHeartIndex(id) {
     const heartRef = document.getElementById(id); // get ID to extract index, since ID was created dynamically according to array index
     let heartIndex = heartRef.id.replace("heart-img", ""); //remove any letters from the id string
@@ -329,7 +333,8 @@ function renderLikeContainer(bookIndex) {
         likesRef.innerHTML = getAddLikeTemplate(bookIndex); //if book is liked, render the counter +1, plus the full heart image
     } else if (books[bookIndex].liked == false) {
         likesRef.innerHTML = getNotLikeTemplate(bookIndex); //if not liked, render normal counter array, plus empty heart image
-    }
+        return
+    } 
 }
 //#endregion
 
