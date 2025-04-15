@@ -204,57 +204,76 @@ let books = [
     },
 ];
 
-let favoriteBooks = [];
-
-const userNameRef = document.getElementById('userName-input');
-
+//for later use when commenting
+const userNameRef = document.getElementById("userName-input");
 
 // #endregion
 
 function init() {
     const savedBooks = loadFromLocalStorage("books");
-    const savedFavoriteBooks = loadFromLocalStorage("favoriteBooks");
-
-    if (savedBooks) books = savedBooks; 
-    if (savedFavoriteBooks) favoriteBooks = savedFavoriteBooks;
-
-    renderBookCards();
-    renderFavoriteBookCards();
+    if (savedBooks) {
+        books = savedBooks; // Load books from local storage if available
+    }
+    renderBookCards(); // Render books array section
+    renderFavoriteBookCards(); // Render favorite books section dynamically
 }
+
 // #region render functions
 
 function renderBookCards() {
     const cardRef = document.getElementById("read-books-content");
-    cardRef.innerHTML = "";
-
-    for (let bookIndex = 0; bookIndex < books.length; bookIndex++) {
-        getCardTemplate(bookIndex);
-        const innerCardRef = document.getElementById(`book${bookIndex}`);
-
-        innerCardRef.innerHTML = "";
-        innerCardRef.innerHTML += getBookCard(bookIndex);
-
-        renderCommentBox(bookIndex);
-        renderLikeContainer(bookIndex);
+    cardRef.innerHTML = ""; // Clear to avoid double rendering
+    for (let index = 0; index < books.length; index++) {
+        getCardTemplate(index); //get outside container of book card
+        const innerCardRef = document.getElementById(`book${index}`);
+        innerCardRef.innerHTML = ""; // emppty it to aovid double book card
+        innerCardRef.innerHTML += getBookCard(index); //fill the container with content depending on the array
+        renderCommentBox(index); //render comments
+        renderLikeContainer(index); //render like counter and heart image
     }
 }
 
 function renderFavoriteBookCards() {
-    const favCardRef = document.getElementById("favorite-books-content");
-
-    //show inner html - either show liked books or hint that no books hae been liked
-    if (favoriteBooks.length == 0) {
-        favCardRef.innerHTML = "Du hast noch keine Bücher geliked.";
-    } else {
-        favCardRef.innerHTML = "";
-        renderFavoriteBookCardsLoop();
+    const favCardRef = clearFavoriteBooksSection(); // empty container to avoid double rendering
+    const likedBooksCount = handleLikedBooks(favCardRef); //counts how many books are liked, which is needed for styling/rendering
+    if (likedBooksCount === 0) {
+        favCardRef.innerHTML = "Du hast noch keine Bücher geliked."; // if no books have been liked, this will be displayed
     }
+    toggleJustifyContentClass(likedBooksCount); // Adjust layout
+}
+
+function clearFavoriteBooksSection() {
+    const favCardRef = document.getElementById("favorite-books-content");
+    favCardRef.innerHTML = ""; // empty container to avoid double rendering
+    return favCardRef; // Return empty container
+}
+
+function handleLikedBooks(favCardRef) {
+    let likedBooksCount = 0;
+    for (let index = 0; index < books.length; index++) {
+        if (books[index].liked) {
+            likedBooksCount++; //add plus 1 to counter
+            renderSingleFavoriteBookCard(index, favCardRef); // Render each card
+        }
+    }
+    return likedBooksCount; // Return count for further processing
+}
+
+function renderSingleFavoriteBookCard(bookIndex, favCardRef) {
+    getFavBookContainer(bookIndex);
+
+    const innerFavCardRef = document.getElementById(
+        `favorite-book${bookIndex}`
+    );
+    innerFavCardRef.innerHTML = ""; // Clear inner content to avoid duplicates
+    innerFavCardRef.innerHTML += getFavBookCard(bookIndex);
 }
 
 //change between justify-contentflex start or space between depending on number of books liked
-function toggleJustifyContentClass() {
+function toggleJustifyContentClass(likedBooksCount) {
     const favCardRef = document.getElementById("favorite-books-content");
-    if (favoriteBooks.length <= 2) {
+
+    if (likedBooksCount <= 2) {
         favCardRef.classList.add("justify-start");
         favCardRef.classList.remove("justify-sp-between");
     } else {
@@ -263,25 +282,16 @@ function toggleJustifyContentClass() {
     }
 }
 
-function renderFavoriteBookCardsLoop() {
-    for (
-        let favBookIndex = 0;
-        favBookIndex < favoriteBooks.length;
-        favBookIndex++
-    ) {
-        getFavBookContainer(favBookIndex);
-
-        const innerFavCardRef = document.getElementById(
-            `favorite-book${favBookIndex}`
-        );
-
-        innerFavCardRef.innerHTML = "";
-        innerFavCardRef.innerHTML += getFavBookCard(favBookIndex);
-
-        renderFavCommentBox(favBookIndex);
-    }
-    toggleJustifyContentClass();
-}
+// iliterate through each book and render depending on each sinlge book.
+// anonymous because it's only used once, and thus doesn't need a name.
+books.forEach(function (_, currentIndex) {
+    getCardTemplate(currentIndex); //create outside countainer
+    const innerCardRef = document.getElementById(`book${currentIndex}`); //access outside container
+    innerCardRef.innerHTML = ""; //empty outside ctonainer to avoid double rendering
+    innerCardRef.innerHTML += getBookCard(currentIndex); // fill ith template function
+    renderCommentBox(currentIndex);
+    renderLikeContainer(currentIndex);
+});
 
 function renderCommentBox(bookIndex) {
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
@@ -294,128 +304,85 @@ function renderCommentBox(bookIndex) {
     }
 }
 
-function renderFavCommentBox(favBookIndex) {
-    const commentRef = document.getElementById(`comment-section${favBookIndex}`);
-    for (
-        let FavCommentIndex = 0;
-        FavCommentIndex < favoriteBooks[favBookIndex].comments.length;
-        FavCommentIndex++
-    ) {
-        commentRef.innerHTML += getFavCommentTemplate(FavCommentIndex, favBookIndex);
-    }
-}
-
 // #endregion
 
 // #region Like Functions
 
 function setLike(id) {
     const likeIndex = findHeartIndex(id);
-    if (books[likeIndex].liked == false) {
-        books[likeIndex].liked = true;
-        addToFavoriteBooks(likeIndex);
-    } else if ((books[likeIndex].liked = true)) {
-        books[likeIndex].liked = false;
-        removeFromFavoriteBooks(likeIndex);
-    }
-    renderLikeContainer(likeIndex);
-    renderFavoriteBookCards();
+    books[likeIndex].liked = !books[likeIndex].liked; //toggle liked status (shortcut for if/else)
+    saveToLocalStorage("books", books); //save updated books array to local storage
+    renderBookCards(); // re-render main book cards
+    renderFavoriteBookCards(); // re-render favorite book cards
     renderLikeContainer(likeIndex);
 }
-
-function addToFavoriteBooks(likeIndex) {
-    favoriteBooks.push(books[likeIndex]);
-    saveToLocalStorage("favoriteBooks", favoriteBooks);
-}
-
-function removeFromFavoriteBooks(likeIndex) {
-    favoriteBooks.splice(likeIndex, 1);
-    saveToLocalStorage("favoriteBooks", favoriteBooks);
-}
-
 function findHeartIndex(id) {
-    const heartRef = document.getElementById(id);
-    const heartIndex = heartRef.id.replace("heart-img", "");
+    const heartRef = document.getElementById(id); // get ID to extract index, since ID was created dynamically according to array index
+    let heartIndex = heartRef.id.replace("heart-img", ""); //remove any letters from the id string
+    heartIndex = Number(heartIndex); //turn left-over number in string to a number
     return heartIndex;
 }
 
 function renderLikeContainer(bookIndex) {
-    const likesRef = document.getElementById(`likes${bookIndex}`);
+    const likesRef = document.getElementById(`likes${bookIndex}`); //get id to check boolean for likes
     if (books[bookIndex].liked == true) {
-        likesRef.innerHTML = getAddLikeTemplate(bookIndex);
+        likesRef.innerHTML = getAddLikeTemplate(bookIndex); //if book is liked, render the counter +1, plus the full heart image
     } else if (books[bookIndex].liked == false) {
-        likesRef.innerHTML = getNotLikeTemplate(bookIndex);
+        likesRef.innerHTML = getNotLikeTemplate(bookIndex); //if not liked, render normal counter array, plus empty heart image
     }
 }
-
-
 //#endregion
 
 // #region comment functions
-
 function addComment(id) {
     const inputRef = document.getElementById(id); //from rendered containers
-
     const inputIndex = inputRef.id.replace("comment-input", ""); //to get Index, to find book in array
-    
-    pushComment(inputIndex, inputRef);
-
+    pushComment(inputIndex, inputRef); //push Code to array
     const commentRef = document.getElementById(`comment-section${inputIndex}`);
-    commentRef.innerHTML= "";   //empty comment box to avoid double comments
-
-
+    commentRef.innerHTML = ""; //empty comment box to avoid double comments
     renderBookCards();
-    renderFavoriteBookCards();
-    
-
 }
 
 function pushComment(inputIndex, inputRef) {
-    const newComment = createCommentsObject(inputRef);
-    books[inputIndex].comments.push(newComment);
-
-    // Save updated books and favoriteBooks arrays to local storage
+    const newComment = createCommentsObject(inputRef); //create new comment
+    books[inputIndex].comments.push(newComment); //add newly created Comment to the array
+    //save updated books and favoriteBooks arrays to local storage
     saveToLocalStorage("books", books);
-    saveToLocalStorage("favoriteBooks", favoriteBooks);
 }
 
 function createCommentsObject(inputRef) {
-    const nameInput = userNameRef.value // Replace with dynamic username later
+    const nameInput = userNameRef.value; // Replace with dynamic username later
     const commentInput = inputRef.value.trim(); //get and safe comment
-
-    //creating new object to push to both arrays
+    //creating new object to push
     const newComment = {
         name: nameInput,
         comment: commentInput,
     };
-
     return newComment;
 }
-
 //#endregion
 
 //#region Local Storage
 function saveToLocalStorage(key, data) {
-    localStorage.setItem(key, JSON.stringify(data)); // Convert data to JSON string and save
+    localStorage.setItem(key, JSON.stringify(data));
 }
 
 function loadFromLocalStorage(key) {
-    const data = localStorage.getItem(key); // Retrieve the JSON string
+    const data = localStorage.getItem(key);
     if (data) {
-        return JSON.parse(data); // Parse the JSON string if data exists
+        return JSON.parse(data);
     } else {
-        return null; // Return null if data is falsy
+        return null;
     }
 }
 //#endregion
 
 //#region Username functionality
 
-
-function toggleOverlayVisibility(){
-    const overlayRef = document.getElementById('overlay')
-    overlayRef.classList.remove('d-flex');
-    overlayRef.classList.add('d-none');
+function toggleOverlayVisibility() {
+    const overlayRef = document.getElementById("overlay");
+    overlayRef.classList.remove("d-flex"); //display: flex
+    overlayRef.classList.add("d-none"); //display: none
 }
 
 //#endregion

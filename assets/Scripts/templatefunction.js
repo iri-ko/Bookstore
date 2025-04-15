@@ -4,7 +4,6 @@ function getCardTemplate(bookIndex) {
     cardRef.innerHTML += `<div id="book${bookIndex}" class="book-card"></div>`;
 }
 
-
 function getBookCard(bookIndex) {
     return `
     <h3 class="padding-20">${books[bookIndex].name}</h3>
@@ -64,6 +63,7 @@ function getBookCard(bookIndex) {
         <input
             type="text"
             id="comment-input${bookIndex}"
+            placeholder="Füge ein Kommentar hinzu!"
             required
         />
         <img
@@ -72,11 +72,10 @@ function getBookCard(bookIndex) {
             onclick="addComment('comment-input${bookIndex}')"
 
         />
-    </form>`
+    </form>`;
 }
 
-
-function getCommentTemplate(commentIndex, bookIndex){
+function getCommentTemplate(commentIndex, bookIndex) {
     return `<div
             class="comment-content"
             id="b${bookIndex}-comment${commentIndex}"
@@ -87,10 +86,10 @@ function getCommentTemplate(commentIndex, bookIndex){
             <span class="comment" id="comment-b${bookIndex}-comment${commentIndex}"
                 >${books[bookIndex].comments[commentIndex].comment}</span
             >
-        </div>`
+        </div>`;
 }
 
-function getFavCommentTemplate(FavCommentIndex, favBookIndex){
+function getFavCommentTemplate(FavCommentIndex, favBookIndex) {
     return `<div
             class="comment-content"
             id="b${favBookIndex}-comment${FavCommentIndex}"
@@ -101,11 +100,13 @@ function getFavCommentTemplate(FavCommentIndex, favBookIndex){
             <span class="comment" id="comment-b${favBookIndex}-comment${favBookIndex}"
                 >${favoriteBooks[favBookIndex].comments[FavCommentIndex].comment}</span
             >
-        </div>`
+        </div>`;
 }
 
-function getAddLikeTemplate(bookIndex){
-    return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes + 1}</span>
+function getAddLikeTemplate(bookIndex) {
+    return `    <span id="like-counter${bookIndex}">${
+        books[bookIndex].likes + 1
+    }</span>
                 <img
                     id="heart-img${bookIndex}"
                     src="assets/icons/full_heart.png"
@@ -113,10 +114,10 @@ function getAddLikeTemplate(bookIndex){
                     class= "heart-img"
                     onclick="setLike('heart-img${bookIndex}')"
                 />
-            `
+            `;
 }
 
-function  getNotLikeTemplate(bookIndex){
+function getNotLikeTemplate(bookIndex) {
     return `    <span id="like-counter${bookIndex}">${books[bookIndex].likes}</span>
                 <img
                     id="heart-img${bookIndex}"
@@ -125,55 +126,65 @@ function  getNotLikeTemplate(bookIndex){
                     class= "heart-img"
                     onclick="setLike('heart-img${bookIndex}')"
                 />
-            `
+            `;
 }
 
-function getFavBookContainer(favBookIndex){
+function getFavBookContainer(favBookIndex) {
     const FavCardRef = document.getElementById("favorite-books-content");
 
     FavCardRef.innerHTML += `<div id="favorite-book${favBookIndex}" class="border-pink book-card"></div>`;
 }
 
-function getFavBookCard(favBookIndex) {
+function getFavBookCard(bookIndex) {
     return `
-    <h3 class="padding-20">${favoriteBooks[favBookIndex].name}</h3>
+    <h3 class="padding-20">${books[bookIndex].name}</h3>
 
-    <img class="book-img" src="${favoriteBooks[favBookIndex].cover}"/>
+    <img class="book-img" src="${books[bookIndex].cover}"/>
 
-    <div id="book-infos${favBookIndex}" class="book-infos padding-20">
+    <div id="book-infos${bookIndex}" class="book-infos padding-20">
         <div
-            id="price-and-likes${favBookIndex}"
+            id="price-and-likes${bookIndex}"
             class="price-and-likes"
         >
-            <span class="price" id="price${favBookIndex}">${favoriteBooks[favBookIndex].price} &euro;</span>
+            <span class="price" id="price${bookIndex}">${
+        books[bookIndex].price
+    } &euro;</span>
 
-            <div id="likes${favBookIndex}" class="likes">
-                <span id="like-counter${favBookIndex}">${favoriteBooks[favBookIndex].likes + 1}</span>
+            <div id="likes${bookIndex}" class="likes">
+                <span id="like-counter${bookIndex}">${
+        books[bookIndex].likes + 1
+    }</span>
                 <img
-                    id="heart-img${favBookIndex}"
+                    id="heart-img${bookIndex}"
                     src="assets/icons/full_heart.png"
                     alt=""
                     class= "heart-img"
-                    onclick="setLike('heart-img${favBookIndex}')"
+                    onclick="setLike('heart-img${bookIndex}')"
                 />
             </div>
         </div>
 
-        <div id="book-info-list" class="info-list${favBookIndex}">
+        <div id="book-info-list" class="info-list${bookIndex}">
             <div class="info-pair">
                 <span class="bold">Author:</span>
-                <span>&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].author}</span>
+                <span>&nbsp;&nbsp;&nbsp;${
+                    books[bookIndex].author
+                }</span>
             </div>
             <div class="info-pair">
                 <span class="bold">Year:</span
-                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].publishedYear}</span>
+                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${
+                    books[bookIndex].publishedYear
+                }</span>
             </div>
             <div class="info-pair">
                 <span class="bold">Genre:</span
-                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${favoriteBooks[favBookIndex].genre}</span>
+                ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${
+                    books[bookIndex].genre
+                }</span>
             </div>
         </div>
-    </div>`
-
-
+    </div>`;
 }
+
+
