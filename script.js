@@ -209,6 +209,7 @@ const userNameRef = document.getElementById("userName-input");
 
 // #endregion
 
+
 function init() {
     const savedBooks = loadFromLocalStorage("books");
     if (savedBooks) {
@@ -217,6 +218,7 @@ function init() {
     renderBookCards(); // Render books array section
     renderFavoriteBookCards(); // Render favorite books section dynamically
 }
+
 
 // #region render functions
 
@@ -261,7 +263,6 @@ function handleLikedBooks(favCardRef) {
 
 function renderSingleFavoriteBookCard(bookIndex, favCardRef) {
     getFavBookContainer(bookIndex);
-
     const innerFavCardRef = document.getElementById(
         `favorite-book${bookIndex}`
     );
@@ -272,7 +273,6 @@ function renderSingleFavoriteBookCard(bookIndex, favCardRef) {
 //change between justify-contentflex start or space between depending on number of books liked
 function toggleJustifyContentClass(likedBooksCount) {
     const favCardRef = document.getElementById("favorite-books-content");
-
     if (likedBooksCount <= 2) {
         favCardRef.classList.add("justify-start");
         favCardRef.classList.remove("justify-sp-between");
@@ -281,11 +281,6 @@ function toggleJustifyContentClass(likedBooksCount) {
         favCardRef.classList.remove("justify-start");
     }
 }
-
-// iliterate through each book and render depending on each sinlge book.
-// anonymous because it's only used once, and thus doesn't need a name.
-
-
 function renderCommentBox(bookIndex) {
     const commentRef = document.getElementById(`comment-section${bookIndex}`);
     for (
@@ -298,6 +293,7 @@ function renderCommentBox(bookIndex) {
 }
 
 // #endregion
+
 
 // #region Like Functions
 
@@ -333,12 +329,15 @@ function renderLikeContainer(bookIndex) {
         likesRef.innerHTML = getAddLikeTemplate(bookIndex); //if book is liked, render the counter +1, plus the full heart image
     } else if (books[bookIndex].liked == false) {
         likesRef.innerHTML = getNotLikeTemplate(bookIndex); //if not liked, render normal counter array, plus empty heart image
-        return
-    } 
+        return;
+    }
 }
+
 //#endregion
 
+
 // #region comment functions
+
 function addComment(id) {
     const inputRef = document.getElementById(id); //from rendered containers
     const inputIndex = inputRef.id.replace("comment-input", ""); //to get Index, to find book in array
@@ -365,9 +364,11 @@ function createCommentsObject(inputRef) {
     };
     return newComment;
 }
+
 //#endregion
 
 //#region Local Storage
+
 function saveToLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
@@ -380,6 +381,7 @@ function loadFromLocalStorage(key) {
         return null;
     }
 }
+
 //#endregion
 
 //#region Username functionality
