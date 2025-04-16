@@ -213,10 +213,10 @@ const userNameRef = document.getElementById("userName-input");
 function init() {
     const savedBooks = loadFromLocalStorage("books");
     if (savedBooks) {
-        books = savedBooks; // Load books from local storage if available
+        books = savedBooks;
     }
-    renderBookCards(); // Render books array section
-    renderFavoriteBookCards(); // Render favorite books section dynamically
+    renderBookCards();
+    renderFavoriteBookCards();
 }
 
 
@@ -224,53 +224,51 @@ function init() {
 
 function renderBookCards() {
     const cardRef = document.getElementById("read-books-content");
-    cardRef.innerHTML = ""; // Clear to avoid double rendering
+    cardRef.innerHTML = "";
     for (let index = 0; index < books.length; index++) {
-        getCardTemplate(index); //get outside container of book card
+        getCardTemplate(index);
         const innerCardRef = document.getElementById(`book${index}`);
-        innerCardRef.innerHTML = ""; // emppty it to aovid double book card
-        innerCardRef.innerHTML += getBookCard(index); //fill the container with content depending on the array
-        renderCommentBox(index); //render comments
-        renderLikeContainer(index); //render like counter and heart image
+        innerCardRef.innerHTML = "";
+        innerCardRef.innerHTML += getBookCard(index);
+        renderCommentBox(index); 
+        renderLikeContainer(index);
     }
 }
 
 function renderFavoriteBookCards() {
-    const favCardRef = clearFavoriteBooksSection(); // empty container to avoid double rendering
-    const likedBooksCount = handleLikedBooks(favCardRef); //counts how many books are liked, which is needed for styling/rendering
+    const favCardRef = clearFavoriteBooksSection();
+    const likedBooksCount = handleLikedBooks(favCardRef);
     if (likedBooksCount === 0) {
-        favCardRef.innerHTML = "Du hast noch keine Bücher geliked."; // if no books have been liked, this will be displayed
+        favCardRef.innerHTML = "Du hast noch keine Bücher geliked.";
     }
-    toggleJustifyContentClass(likedBooksCount); // adjust layout
+    toggleJustifyContentClass(likedBooksCount);
 }
 
 function clearFavoriteBooksSection() {
     const favCardRef = document.getElementById("favorite-books-content");
-    favCardRef.innerHTML = ""; // empty container to avoid double rendering
-    return favCardRef; // return empty container
+    favCardRef.innerHTML = "";
+    return favCardRef;
 }
 
 function handleLikedBooks(favCardRef) {
     let likedBooksCount = 0;
     for (let index = 0; index < books.length; index++) {
         if (books[index].liked) {
-            likedBooksCount++; //add plus 1 to counter
-            renderSingleFavoriteBookCard(index, favCardRef); // render each card
+            likedBooksCount++; 
+            renderSingleFavoriteBookCard(index, favCardRef);
         }
     }
-    return likedBooksCount; // Return count for further processing
+    return likedBooksCount;
 }
 
 function renderSingleFavoriteBookCard(bookIndex, favCardRef) {
     getFavBookContainer(bookIndex);
     const innerFavCardRef = document.getElementById(
-        `favorite-book${bookIndex}`
-    );
-    innerFavCardRef.innerHTML = ""; // Clear inner content to avoid duplicates
+        `favorite-book${bookIndex}`    );
+    innerFavCardRef.innerHTML = ""; 
     innerFavCardRef.innerHTML += getFavBookCard(bookIndex);
 }
 
-//change between justify-contentflex start or space between depending on number of books liked
 function toggleJustifyContentClass(likedBooksCount) {
     const favCardRef = document.getElementById("favorite-books-content");
     if (likedBooksCount <= 2) {
@@ -299,36 +297,36 @@ function renderCommentBox(bookIndex) {
 
 function setLike(id) {
     const likeIndex = findHeartIndex(id);
-    books[likeIndex].liked = !books[likeIndex].liked; // Toggle liked status
-    saveToLocalStorage("books", books); // Save updated books array to local storage
-    renderSingleLikeContainer(likeIndex); // Render like container for the specific book
-    renderFavoriteBookCards(); // Re-render favorite book cards section;
+    books[likeIndex].liked = !books[likeIndex].liked; 
+    saveToLocalStorage("books", books); 
+    renderSingleLikeContainer(likeIndex);
+    renderFavoriteBookCards();
     renderSingleLikeContainer(likeIndex);
 }
 
 function renderSingleLikeContainer(bookIndex) {
-    const likesRef = document.getElementById(`likes${bookIndex}`); // access like container
-    likesRef.innerHTML = ""; // clear the content to avoid double rendering
+    const likesRef = document.getElementById(`likes${bookIndex}`); 
+    likesRef.innerHTML = "";
     if (books[bookIndex].liked == true) {
-        likesRef.innerHTML = getAddLikeTemplate(bookIndex); // render favLike template
+        likesRef.innerHTML = getAddLikeTemplate(bookIndex); 
     } else if (books[bookIndex].liked == false) {
-        likesRef.innerHTML = getNotLikeTemplate(bookIndex); // render not liked template
+        likesRef.innerHTML = getNotLikeTemplate(bookIndex);
     }
 }
 
 function findHeartIndex(id) {
-    const heartRef = document.getElementById(id); // get ID to extract index, since ID was created dynamically according to array index
-    let heartIndex = heartRef.id.replace("heart-img", ""); //remove any letters from the id string
-    heartIndex = Number(heartIndex); //turn left-over number in string to a number
+    const heartRef = document.getElementById(id);
+    let heartIndex = heartRef.id.replace("heart-img", ""); 
+    heartIndex = Number(heartIndex);
     return heartIndex;
 }
 
 function renderLikeContainer(bookIndex) {
-    const likesRef = document.getElementById(`likes${bookIndex}`); //get id to check boolean for likes
+    const likesRef = document.getElementById(`likes${bookIndex}`); 
     if (books[bookIndex].liked == true) {
-        likesRef.innerHTML = getAddLikeTemplate(bookIndex); //if book is liked, render the counter +1, plus the full heart image
+        likesRef.innerHTML = getAddLikeTemplate(bookIndex);
     } else if (books[bookIndex].liked == false) {
-        likesRef.innerHTML = getNotLikeTemplate(bookIndex); //if not liked, render normal counter array, plus empty heart image
+        likesRef.innerHTML = getNotLikeTemplate(bookIndex);
         return;
     }
 }
@@ -339,12 +337,13 @@ function renderLikeContainer(bookIndex) {
 // #region comment functions
 
 function addComment(id) {
-    const inputRef = document.getElementById(id);
-    const inputIndex = inputRef.id.replace("comment-input", "");
+    const inputRef = document.getElementById(id); 
+    const inputIndex = inputRef.id.replace("comment-input", ""); 
     pushComment(inputIndex, inputRef);
     const commentRef = document.getElementById(`comment-section${inputIndex}`);
-    commentRef.innerHTML = ""; 
-    renderCommentsForSingleBook(commentRef, inputIndex);
+    commentRef.innerHTML = "";
+    renderCommentsForSingleBook(commentRef, inputIndex); 
+
     inputRef.value = "";
 }
 
@@ -362,16 +361,14 @@ function renderCommentsForSingleBook(commentRef, bookIndex) {
 
 
 function pushComment(inputIndex, inputRef) {
-    const newComment = createCommentsObject(inputRef); //create new comment
-    books[inputIndex].comments.push(newComment); //add newly created Comment to the array
-    //save updated books and favoriteBooks arrays to local storage
+    const newComment = createCommentsObject(inputRef); 
+    books[inputIndex].comments.push(newComment); 
     saveToLocalStorage("books", books);
 }
 
 function createCommentsObject(inputRef) {
-    const nameInput = userNameRef.value; // Replace with dynamic username later
-    const commentInput = inputRef.value.trim(); //get and safe comment
-    //creating new object to push
+    const nameInput = userNameRef.value;
+    const commentInput = inputRef.value.trim();
     const newComment = {
         name: nameInput,
         comment: commentInput,
@@ -402,8 +399,8 @@ function loadFromLocalStorage(key) {
 
 function toggleOverlayVisibility() {
     const overlayRef = document.getElementById("overlay");
-    overlayRef.classList.remove("d-flex"); //display: flex
-    overlayRef.classList.add("d-none"); //display: none
+    overlayRef.classList.remove("d-flex");
+    overlayRef.classList.add("d-none");
 }
 
 //#endregion
