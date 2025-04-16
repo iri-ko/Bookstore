@@ -339,13 +339,27 @@ function renderLikeContainer(bookIndex) {
 // #region comment functions
 
 function addComment(id) {
-    const inputRef = document.getElementById(id); //from rendered containers
-    const inputIndex = inputRef.id.replace("comment-input", ""); //to get Index, to find book in array
-    pushComment(inputIndex, inputRef); //push Code to array
+    const inputRef = document.getElementById(id);
+    const inputIndex = inputRef.id.replace("comment-input", "");
+    pushComment(inputIndex, inputRef);
     const commentRef = document.getElementById(`comment-section${inputIndex}`);
-    commentRef.innerHTML = ""; //empty comment box to avoid double comments
-    renderBookCards();
+    commentRef.innerHTML = ""; 
+    renderCommentsForSingleBook(commentRef, inputIndex);
+    inputRef.value = "";
 }
+
+function renderCommentsForSingleBook(commentRef, bookIndex) {
+    for (
+        let commentIndex = 0;
+        commentIndex < books[bookIndex].comments.length;
+        commentIndex++
+    ) {
+        commentRef.innerHTML += getCommentTemplate(commentIndex, bookIndex);
+    }
+}
+
+
+
 
 function pushComment(inputIndex, inputRef) {
     const newComment = createCommentsObject(inputRef); //create new comment
